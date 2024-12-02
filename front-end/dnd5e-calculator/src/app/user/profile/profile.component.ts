@@ -28,14 +28,14 @@ export class ProfileComponent {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    const {username, email} = this.userService.user!;
-
+    const {username, email} = this.userService?.user!;
+    
     this.profileDetails = {username, email};
 
     this.form.setValue({
       username, 
       email,
-    })
+    });
   }
 
   edit() {
@@ -58,6 +58,14 @@ export class ProfileComponent {
 
   cancel(event: Event) {
     event.preventDefault();
+
+    const {username, email} = this.userService.user!;
+
+    this.form.setValue({
+      username, 
+      email,
+    });
+
     this.edit();
   }
 }

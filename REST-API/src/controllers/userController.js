@@ -46,7 +46,7 @@ userController.get('/profile', async (req, res) => {
     } catch (error) {
         console.error(error);
 
-        res.end();
+        res.status(401).end();
     }
 });
 
@@ -56,7 +56,7 @@ userController.put('/profile', async (req, res) => {
 
     try {
         await userService.updateProfile(userId, userData);
-        
+
         const response = await userService.getProfile(userData.email);
 
         res.json(response);

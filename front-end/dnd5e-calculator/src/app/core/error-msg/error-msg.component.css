@@ -1,0 +1,40 @@
+.notification{
+position: fixed;
+z-index: 10;
+right: 8%;
+top: 8%;
+padding: 0.5rem;
+border-radius: 0.5rem;
+color: rgb(255, 255, 255);
+font-style: italic;
+text-decoration: underline;
+box-shadow: 0 5px 10px rgb(204, 204, 204);
+background-color: rgba(238, 74, 74, 0.699);
+}
+
+.error-message {
+background-color: rgba(238, 74, 74, 0.699);
+}
+
+.success-message {
+background-color: rgba(99, 230, 81, 0.699);
+}
+
+body {
+    margin: 0;
+    height: 87.7vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../../home/home-img.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    text-align: center;
+    color: #ffffff;
+    z-index: 1;
+}
