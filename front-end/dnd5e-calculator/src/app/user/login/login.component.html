@@ -1,4 +1,4 @@
-<div class="mask d-flex align-items-center h-100 gradient-custom-3">
+<div class="mask d-flex align-items-center justify-content-center gradient-custom-3">
     <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
@@ -10,7 +10,7 @@
                         <h2 class="text-uppercase text-center mb-5">Login</h2>
 
                         <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="form3Example3cg">Email:</label>
+                            <label class="form-label" for="form3Example3cg" >Email:</label>
                             <input 
                             type="email" 
                             id="email"
@@ -19,8 +19,21 @@
                             ngModel
                             #inputEmail="ngModel"
                             required
+                            [appEmail]="domains"
                             />
                         </div>
+
+                        @if (inputEmail?.touched) {
+                            <div>
+                                @if (inputEmail?.errors?.['required']) {
+                                    <p class="error">Email is required!</p>
+                                }
+            
+                                @if (inputEmail?.errors?.['emailIsValid']) {
+                                    <p class="error">Email is not valid!</p>
+                                }
+                            </div>
+                        }
 
                         <div data-mdb-input-init class="form-outline mb-4">
                             <label class="form-label" for="form3Example4cg">Password:</label>
@@ -35,6 +48,21 @@
                             required
                             />
                         </div>
+
+                        
+                        @if (inputPassword?.touched) {
+                            <div>
+                                @if (inputPassword?.errors?.['required']) {
+                                    <p class="error">Password is required!</p>
+                                }
+            
+                                @if (inputPassword?.errors?.['minlength']) {
+                                    <p class="error">Password must be at least 5 characters!</p>
+                                }
+                            </div>
+                        }
+
+
                         <div class="d-flex justify-content-center">
                             <button [disabled]="form.invalid" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
                         </div>

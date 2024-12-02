@@ -40,6 +40,9 @@ const userService = {
         
         return this.generateResponse(user);
     },
+    updateProfile(userId, userData) {
+        return User.findByIdAndUpdate(userId, userData, {runValidators: true});
+    },
     async generateResponse(user) {
         const payload = {
             _id: user._id,

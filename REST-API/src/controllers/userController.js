@@ -14,6 +14,8 @@ userController.post('/register', async (req, res) => {
         res.json(response);
     } catch (error) {
         console.error(error);
+
+        res.end();
     }
 });
 
@@ -28,6 +30,8 @@ userController.post('/login', async (req, res) => {
         res.json(response);
     } catch (error) {
         console.error(error);
+
+        res.end();
     }
 });
 
@@ -41,6 +45,26 @@ userController.get('/profile', async (req, res) => {
         
     } catch (error) {
         console.error(error);
+
+        res.end();
+    }
+});
+
+userController.put('/profile', async (req, res) => {
+    const userId = req.cookies['auth']._id;
+    const userData = req.body;
+
+    try {
+        await userService.updateProfile(userId, userData);
+        
+        const response = await userService.getProfile(userData.email);
+
+        res.json(response);
+
+    } catch (error) {
+        console.error(error);
+
+        res.end();
     }
 });
 

@@ -1,1 +1,55 @@
-<p>profile works!</p>
+@if (!isEditMode) {
+    <!-- READONLY MODE -->
+    <ng-container>
+        <div class="container">
+            <div class="profile">
+            <!-- <img src="./profile.png" alt="default user"> -->
+                <h3>User Info:</h3>
+                <div class="flex">
+                    <p>Username: </p>
+                    <p>{{profileDetails.username}}</p>
+                </div>
+                <div class="flex">
+                    <p>Email: </p>
+                    <p>{{profileDetails.email}}</p>
+                </div>
+                <button class="edit-button" (click)="edit()">Edit</button>        
+            </div>
+        </div>
+    </ng-container>
+}@else {
+    <!-- EDIT MODE -->
+    
+    <ng-container>
+        <div class="container">
+            <div class="profile">
+                <!-- <img src="./profile.png" alt="default user"> -->
+                <h3>User Info:</h3>
+                <form [formGroup]="form" (ngSubmit)="handleSaveProfile()">
+                    <div class="flex">
+                        <p>Username: </p>
+                        <input 
+                        type="text" 
+                        name="username" 
+                        id="username" 
+                        formControlName="username"
+                        >
+                    </div>
+                    <div class="flex">
+                        <p>Email: </p>
+                        <input 
+                        type="email" 
+                        name="email" 
+                        id="email" 
+                        formControlName="email"
+                        >
+                    </div>
+                    <div class="btn-wrapper">
+                        <button class="red-button" (click)="cancel($event)">Cancel</button>
+                        <button class="green-button" [disabled]="form.invalid" [style]="{backgroundColor: form.invalid ? 'grey': '#5cb85c'}">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </ng-container>
+}

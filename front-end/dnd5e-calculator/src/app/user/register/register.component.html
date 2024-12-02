@@ -1,4 +1,4 @@
-<div class="mask d-flex align-items-center h-100 gradient-custom-3">
+<div class="mask d-flex align-items-center justify-content-center gradient-custom-3">
 <div class="container h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
     <div class="col-12 col-md-9 col-lg-7 col-xl-6">
@@ -17,10 +17,23 @@
                         name="username"
                         class="form-control form-control-lg" 
                         ngModel
-                        #inputEmail="ngModel"
+                        #inputUsername="ngModel"
                         required
+                        minlength="2"
                         />
                     </div>
+
+                    @if (inputUsername?.touched) {
+                        <div>
+                            @if (inputUsername?.errors?.['required']) {
+                                <p class="error">Username is required!</p>
+                            }
+        
+                            @if (inputUsername?.errors?.['minlength']) {
+                                <p class="error">Username should be at least 2 characters!</p>
+                            }
+                        </div>
+                    }
 
                     <div data-mdb-input-init class="form-outline mb-4">
                         <label class="form-label" for="form3Example3cg">Email:</label>
@@ -32,8 +45,21 @@
                         ngModel
                         #inputEmail="ngModel"
                         required
+                        [appEmail]="domains"
                         />
                     </div>
+
+                    @if (inputEmail?.touched) {
+                        <div>
+                            @if (inputEmail?.errors?.['required']) {
+                                <p class="error">Email is required!</p>
+                            }
+        
+                            @if (inputEmail?.errors?.['emailIsValid']) {
+                                <p class="error">Email is not valid!</p>
+                            }
+                        </div>
+                    }
 
                     <div data-mdb-input-init class="form-outline mb-4">
                         <label class="form-label" for="form3Example4cg">Password:</label>
@@ -49,6 +75,18 @@
                         />
                     </div>
 
+                    @if (inputPassword?.touched) {
+                        <div>
+                            @if (inputPassword?.errors?.['required']) {
+                                <p class="error">Password is required!</p>
+                            }
+        
+                            @if (inputPassword?.errors?.['minlength']) {
+                                <p class="error">Password must be at least 5 characters!</p>
+                            }
+                        </div>
+                    }
+
                     <div data-mdb-input-init class="form-outline mb-4">
                         <label class="form-label" for="form3Example4cdg">Repeat your password:</label>
                         <input 
@@ -60,8 +98,16 @@
                         #inputRePassword="ngModel"
                         minlength="5"
                         required
-                        />
+                        /> 
                     </div>
+
+                    @if(inputRePassword?.touched) {
+                        <div>
+                            @if((inputPassword.value !== inputRePassword.value) || inputRePassword?.errors?.['required']) {
+                                <p class="error">Passwords do not match!</p>
+                            }
+                        </div>
+                    }
 
                     <div class="d-flex justify-content-center">
                         <button [disabled]="form.invalid" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
