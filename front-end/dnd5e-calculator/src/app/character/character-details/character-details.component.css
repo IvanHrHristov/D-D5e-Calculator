@@ -1,0 +1,23 @@
+.error {
+    color: red;
+}
+
+.mask {
+    min-height: 88vh;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    flex: 1;
+    background-image: url('details-character-img.png');
+    background-size: cover;
+    background-position: 50% 35%;
+    background-repeat: no-repeat;
+}
+
+.card {
+    border: .3em solid #202529;
+}
+
+.btn {
+    margin-left: 20px;
+    margin-right: 20px;
+}

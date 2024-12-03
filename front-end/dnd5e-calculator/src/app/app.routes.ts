@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ErrorMsgComponent } from './core/error-msg/error-msg.component';
 import { CreateCharacterComponent } from './character/create-character/create-character.component';
 import { CharacterListComponent } from './character/character-list/character-list.component';
+import { CharacterDetailsComponent } from './character/character-details/character-details.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -19,6 +20,7 @@ export const routes: Routes = [
 
     {path: 'characters', component: CharacterListComponent},
     {path: 'characters/create', component: CreateCharacterComponent},
+    {path: 'characters/details/:characterId', component: CharacterDetailsComponent},
 
     {path: 'error', component: ErrorMsgComponent},
     {path: '404', component: PageNotFoundComponent},

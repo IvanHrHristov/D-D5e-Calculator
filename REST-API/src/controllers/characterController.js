@@ -6,8 +6,6 @@ const characterController = Router();
 characterController.get('/', async (req, res) => {
     const characters = await characterService.getAll().lean();
 
-    console.log(characters);
-    
     res.json(characters);
 });
 
@@ -24,6 +22,27 @@ characterController.post('/create', async (req, res) => {
         console.error(error);
 
         res.status(503).end();
+    }
+});
+
+characterController.get('/details/:characterId', async (req, res) => {
+    const character = await characterService.getOne(req.params.characterId).lean();
+
+    res.json(character);
+});
+
+characterController.put('/edit/:characterId', async (req, res) => {
+    const character = req.body;
+    const characterId = req.params.characterId;
+
+    try {
+        await characterService.edit(characterId, character);
+
+        res.end();
+    } catch (error) {
+        console.error(error);
+        
+        res.end();
     }
 });
 

@@ -1,1 +1,124 @@
-<p>character-details works!</p>
+@if (!isEditMode) {
+    <div class="mask d-flex align-items-center justify-content-center gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div class="card" style="border-radius: 15px;">
+                <div class="card-body p-5">
+
+                    <h2 class="text-uppercase text-center mb-5">Character details</h2>
+                    
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <p><b>Character name:</b> {{characterName}}</p>
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <p><b>Class:</b> {{characterClass}}</p>
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <p><b>Weapon dice:</b> {{weaponDice}}</p>
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <p><b>Number of attacks per round:</b> {{attacks}}</p>
+                    </div>
+
+                    <!-- TODO: Math for DPR -->
+
+                    <div class="d-flex justify-content-center">
+                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" (click)="edit()">Edit</button>
+                    </div>
+
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+}@else {
+    <div class="mask d-flex align-items-center justify-content-center gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div class="card" style="border-radius: 15px;">
+                <div class="card-body p-5">
+                    
+                    <form #form="ngForm" (ngSubmit)="handleEdit(form)">
+                        <fieldset>
+                            <h2 class="text-uppercase text-center mb-5">Edit character</h2>
+                            
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="form3Example1cg">Character Name:</label>
+                                <input 
+                                type="text" 
+                                id="characterName"
+                                name="characterName"
+                                class="form-control form-control-lg" 
+                                [(ngModel)]="characterName"
+                                #inputCharacterName="ngModel"
+                                required
+                                
+                                />
+                            </div>
+        
+                            @if (inputCharacterName?.touched) {
+                                <div>
+                                    @if (inputCharacterName?.errors?.['required']) {
+                                        <p class="error">Character name is required!</p>
+                                    }
+                                </div>
+                            }
+        
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="form3Example3cg">Class:</label>
+                                <select class="form-select" aria-label="Default select example" id="characterClass" name="characterClass" [(ngModel)]="characterClass" #inputClass="ngModel" required>
+                                    <option value="barbarian">Barbarian</option>
+                                    <option value="fighter">Fighter</option>
+                                    <option value="monk">Monk</option>
+                                    <option value="paladin">Paladin</option>
+                                    <option value="ranger">Ranger</option>
+                                    <option value="rogue">Rogue</option>
+                                  </select>
+                            </div>
+        
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="form3Example3cg">Weapon dice:</label>
+                                <select class="form-select" aria-label="Default select example" id="weaponDice" name="weaponDice" [(ngModel)]="weaponDice" #inputWeaponDice="ngModel" required>
+                                    <option value="d4">d4</option>
+                                    <option value="d6">d6</option>
+                                    <option value="d8">d8</option>
+                                    <option value="d10">d10</option>
+                                    <option value="d12">d12</option>
+                                    <option value="2d6">2d6</option>
+                                  </select>
+                            </div>
+        
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="form3Example4cg">Number of attacks per round:</label>
+                                <input 
+                                type="number" 
+                                id="attacks"
+                                name="attacks" 
+                                class="form-control form-control-lg" 
+                                [(ngModel)]="attacks"
+                                #inputAttacks="ngModel"
+                                required
+                                min="1"
+                                />
+                            </div>
+        
+                            <div class="d-flex justify-content-center">
+                                <button [disabled]="form.invalid" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Edit</button>
+                                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block btn-lg gradient-custom-4 text-body" (click)="cancel($event)">Cancel</button>
+                            </div>
+                        </fieldset>
+                    </form>
+        
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+}

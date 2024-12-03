@@ -23,6 +23,6 @@ export class CreateCharacterComponent {
 
     this.apiService.createCharacter(characterName, characterClass, weaponDice, attacks).subscribe(() => {
       this.router.navigate(['/characters']);
-    })
+    });
   }
 }
