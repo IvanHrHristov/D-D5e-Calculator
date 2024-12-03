@@ -1,1 +1,28 @@
-<p>character-list works!</p>
+<body>
+    @if (isLoading) {
+        <app-loader />
+    }@else {
+        <div class="container">
+            <div class="row justify-content-start mt-5 mb-5">
+        
+                @for (character of characters; track $index) {
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+                        <div class="card" style="width: 18rem;">
+                            <img src='{{character.characterClass + "-icon.png"}}' class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{character.characterName}}</h5>
+                                <p class="card-text">Class: {{character.characterClass}}</p>
+                                <p class="card-text">Number of attacks: {{character.attacks}}</p>
+                                <p class="card-text">Weapon dice: {{character.weaponDice}}</p>
+                                <div class="d-flex justify-content-center">
+                                    <a [routerLink]="character._id" class="btn btn-primary">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    }
+</body>

@@ -5,7 +5,7 @@ const characterService = {
 
     },
     getAll() {
-
+        return Character.find();
     },
     create(characterData, userId) {
         return Character.create({...characterData, owner: userId});

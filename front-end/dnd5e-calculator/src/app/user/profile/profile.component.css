@@ -1,7 +1,7 @@
 .profile {
     width: 100%;
     max-width: 500px;
-    /* margin: 2em auto 1rem; */
+    margin: 2em auto 1rem;
     margin: 0 auto;
     padding: 1em;
     border: .3em solid #202529;
@@ -117,9 +117,4 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
-    /* display: flex;
-    flex-direction: column;
-    width: 100%;
-    min-height: 100vh; */
 }

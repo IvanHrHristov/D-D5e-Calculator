@@ -3,15 +3,18 @@ import characterService from '../service/characterService.js';
 
 const characterController = Router();
 
+characterController.get('/', async (req, res) => {
+    const characters = await characterService.getAll().lean();
+
+    console.log(characters);
+    
+    res.json(characters);
+});
+
 characterController.post('/create', async (req, res) => {
     const characterData = req.body;
     const cookie = req.cookies['auth'];
     const userId = cookie._id;
-
-    console.log(`Cookie: ${cookie}`);
-    
-    console.log(userId);
-    
 
     try {
         await characterService.create(characterData, userId);

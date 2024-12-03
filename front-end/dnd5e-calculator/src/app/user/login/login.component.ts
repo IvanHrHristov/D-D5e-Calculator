@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnChanges, OnInit, signal, SimpleChanges } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../user.service';
@@ -15,20 +15,19 @@ import { ErrorMsgService } from '../../core/error-msg/error-msg.service';
 })
 export class LoginComponent {
   domains = DOMAINS;
-  errorMsg = null;
+  errorStatus = null;
  
-  constructor(private userService: UserService, private errorMsgService: ErrorMsgService, private router: Router) {}
-  
+  constructor(private userService: UserService, private errorMsgService: ErrorMsgService, private router: Router) {
+    this.errorMsgService.apiError$.subscribe((err: any) => {
+      this.errorStatus = err?.status;
+    });   
+  }
   
   login(form: NgForm) {
     if (form.invalid) {
       return;
     }
 
-    this.errorMsgService.apiError$.subscribe((err: any) => {
-      this.errorMsg = err?.message;
-    });
-    
     const { email, password } = form.value;
 
     this.userService.login(email, password).subscribe(() => {

@@ -44,7 +44,6 @@
                             class="form-control form-control-lg" 
                             ngModel
                             #inputPassword="ngModel"
-                            minlength="5"
                             required
                             />
                         </div>
@@ -56,16 +55,11 @@
                                     <p class="error">Password is required!</p>
                                 }
             
-                                @if (inputPassword?.errors?.['minlength']) {
-                                    <p class="error">Password must be at least 5 characters!</p>
-                                }
-
-                                @if (errorMsg !== null) {
+                                @if (errorStatus === 403) {
                                     <p class="error">Incorrect email or password.</p>
                                 }
                             </div>
                         }
-
 
                         <div class="d-flex justify-content-center">
                             <button [disabled]="form.invalid" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>

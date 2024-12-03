@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import { ProfileDetails } from '../../types/user';
@@ -12,7 +12,7 @@ import { DOMAINS } from '../../constants';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   isEditMode: boolean = false;
 
   profileDetails: ProfileDetails = {
@@ -25,16 +25,16 @@ export class ProfileComponent {
     email: new FormControl('', [Validators.required, emailValidator(DOMAINS)]),
   })
   
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit(): void {
-    const {username, email} = this.userService?.user!;
-    
-    this.profileDetails = {username, email};
-
-    this.form.setValue({
-      username, 
-      email,
+    this.userService.getProfile().subscribe((user) => {
+      if (user) {
+        const {username, email} = user;
+        this.profileDetails = {username, email};
+        this.form.setValue({ username, email });
+      }
     });
   }
 

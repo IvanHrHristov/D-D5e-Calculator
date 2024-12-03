@@ -17,6 +17,7 @@ export class UserService {
   }
 
   constructor(private http: HttpClient) {
+    this.getProfile().subscribe();
     this.user$.subscribe((user) => {
       this.user = user;
     });

@@ -9,6 +9,10 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  getCharacters() {
+    return this.http.get<Character[]>(`/api/characters`);
+  }
+
   createCharacter(characterName: string, characterClass: string, weaponDice: string, attacks: number) {
     const payload = {characterName, characterClass, weaponDice, attacks};
 
