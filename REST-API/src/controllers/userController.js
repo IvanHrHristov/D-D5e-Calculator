@@ -31,7 +31,7 @@ userController.post('/login', async (req, res) => {
     } catch (error) {
         console.error(error);
 
-        res.end();
+        res.status(403).end();
     }
 });
 

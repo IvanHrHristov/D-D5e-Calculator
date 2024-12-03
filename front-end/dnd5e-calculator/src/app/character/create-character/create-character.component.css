@@ -7,9 +7,9 @@
     padding-top: 25px;
     padding-bottom: 25px;
     flex: 1;
-    background-image: url('login-img.png');
+    background-image: url('create-character-img.png');
     background-size: cover;
-    background-position: 50% 25%;
+    background-position: 50% 35%;
     background-repeat: no-repeat;
 }
 

@@ -59,6 +59,10 @@
                                 @if (inputPassword?.errors?.['minlength']) {
                                     <p class="error">Password must be at least 5 characters!</p>
                                 }
+
+                                @if (errorMsg !== null) {
+                                    <p class="error">Incorrect email or password.</p>
+                                }
                             </div>
                         }
 

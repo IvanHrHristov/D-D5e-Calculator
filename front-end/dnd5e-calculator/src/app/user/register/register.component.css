@@ -12,3 +12,7 @@
     background-position: 50% 25%;
     background-repeat: no-repeat;
 }
+
+.card {
+    border: .3em solid #202529;
+}
