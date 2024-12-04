@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { UserForAuth } from '../types/user';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, tap } from 'rxjs';
@@ -8,7 +8,7 @@ import { BehaviorSubject, tap } from 'rxjs';
 })
 export class UserService {
   private user$$ = new BehaviorSubject<UserForAuth | null >(null);
-  private user$ = this.user$$.asObservable();
+  public user$ = this.user$$.asObservable();
 
   user: UserForAuth | null = null;
 
