@@ -14,11 +14,10 @@
                                 <p class="card-text">Class: {{character.characterClass}}</p>
                                 <p class="card-text">Number of attacks: {{character.attacks}}</p>
                                 <p class="card-text">Weapon dice: {{character.weaponDice}}</p>
-                                @if (isLogged) {
-                                    <div class="d-flex justify-content-center">
-                                        <a routerLink='{{"/characters/details/" + character._id}}' class="btn btn-primary">Details</a>
-                                    </div>
-                                }
+                                
+                                <div class="d-flex justify-content-center">
+                                    <a routerLink='{{"/characters/details/" + character._id}}' class="btn btn-primary">Details</a>
+                                </div>
                             </div>
                         </div>
                     </div>

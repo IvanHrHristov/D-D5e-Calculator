@@ -72,9 +72,7 @@ export class CharacterDetailsComponent implements OnInit {
     this.edit();
   }
 
-  delete(event: Event) {
-    event.preventDefault();
-
+  delete() {
     this.apiService.deleteCharacter(this.id).subscribe(() => {
       this.router.navigate(['/characters']);
     });

@@ -46,7 +46,7 @@ userController.get('/profile', async (req, res) => {
     } catch (error) {
         console.error(error);
 
-        res.status(401).end();
+        res.end();
     }
 });
 
