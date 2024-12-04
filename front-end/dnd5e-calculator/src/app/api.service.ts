@@ -28,4 +28,8 @@ export class ApiService {
 
     return this.http.put<Character>(`/api/characters/edit/${characterId}`, payload);
   }
+
+  deleteCharacter(characterId: string) {
+    return this.http.delete<Character>(`/api/characters/delete/${characterId}`);
+  }
 }

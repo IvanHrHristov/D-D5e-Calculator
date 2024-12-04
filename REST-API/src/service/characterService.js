@@ -12,6 +12,9 @@ const characterService = {
     },
     edit(characterId, characterData) {
         return Character.findByIdAndUpdate(characterId, characterData, {runValidators: true});
+    },
+    delete(characterId) {
+        return Character.findByIdAndDelete(characterId);
     }
 }
 

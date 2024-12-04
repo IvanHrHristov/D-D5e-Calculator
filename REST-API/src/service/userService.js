@@ -5,7 +5,6 @@ import User from "../models/User.js"
 
 const userService = {
     async register(username, email, password, rePassword) {
-        //Check if user exists
         if(password !== rePassword) {
             throw new Error('Password missmatch!');
         }

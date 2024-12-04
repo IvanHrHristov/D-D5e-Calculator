@@ -26,10 +26,13 @@
 
                     <!-- TODO: Math for DPR -->
 
-                    <div class="d-flex justify-content-center">
-                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" (click)="edit()">Edit</button>
-                    </div>
-
+                    @if (user?._id === owner) {
+                        <div class="d-flex justify-content-center">
+                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" (click)="edit()">Edit</button>
+                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block btn-lg gradient-custom-4 text-body" (click)="delete($event)">Delete</button>
+                        </div>
+                    }
+                    
                 </div>
                 </div>
             </div>
@@ -109,7 +112,7 @@
                             </div>
         
                             <div class="d-flex justify-content-center">
-                                <button [disabled]="form.invalid" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Edit</button>
+                                <button [disabled]="form.invalid" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Confirm</button>
                                 <button data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block btn-lg gradient-custom-4 text-body" (click)="cancel($event)">Cancel</button>
                             </div>
                         </fieldset>

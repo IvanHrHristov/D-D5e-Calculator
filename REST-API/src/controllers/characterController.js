@@ -42,7 +42,21 @@ characterController.put('/edit/:characterId', async (req, res) => {
     } catch (error) {
         console.error(error);
         
+        res.status(503).end();
+    }
+});
+
+characterController.delete('/delete/:characterId', async (req, res) => {
+    const characterId = req.params.characterId;
+
+    try {
+        await characterService.delete(characterId);
+
         res.end();
+    } catch (error) {
+        console.error(error);
+        
+        res.status(503).end();
     }
 });
 

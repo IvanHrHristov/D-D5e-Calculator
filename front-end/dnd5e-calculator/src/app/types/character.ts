@@ -6,5 +6,5 @@ export interface Character {
     characterClass: string;
     weaponDice: string;
     attacks: number;
-    owner: User;
+    owner: string;
 }

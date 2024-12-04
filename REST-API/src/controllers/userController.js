@@ -15,7 +15,7 @@ userController.post('/register', async (req, res) => {
     } catch (error) {
         console.error(error);
 
-        res.end();
+        res.status(503).end();
     }
 });
 
@@ -64,7 +64,7 @@ userController.put('/profile', async (req, res) => {
     } catch (error) {
         console.error(error);
 
-        res.end();
+        res.status(503).end();
     }
 });
 

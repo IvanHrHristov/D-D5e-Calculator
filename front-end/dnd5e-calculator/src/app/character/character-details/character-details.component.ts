@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Character } from '../../types/character';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../api.service';
-import { UserService } from '../../user/user.service';
 import { FormsModule, NgForm } from '@angular/forms';
+import { UserService } from '../../user/user.service';
+import { User, UserForAuth } from '../../types/user';
 
 @Component({
   selector: 'app-character-details',
@@ -17,20 +18,28 @@ export class CharacterDetailsComponent implements OnInit {
   characterClass: string = '';
   weaponDice: string = '';
   attacks: number = 1;
+  owner: string = '';
   id: string = '';
 
   isEditMode: boolean = false;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private userService: UserService) {}
+  user: UserForAuth | null = null;
+
+  constructor(private route: ActivatedRoute, private apiService: ApiService, private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['characterId'];
+
+    this.userService.getProfile().subscribe(user => {
+      this.user = user;
+    });
 
     this.apiService.getSingleCharacter(this.id).subscribe(character => {
       this.characterName = character.characterName;
       this.characterClass = character.characterClass;
       this.weaponDice = character.weaponDice;
       this.attacks = character.attacks;
+      this.owner = character.owner;
     });
   }
 
@@ -61,5 +70,13 @@ export class CharacterDetailsComponent implements OnInit {
     });
 
     this.edit();
+  }
+
+  delete(event: Event) {
+    event.preventDefault();
+
+    this.apiService.deleteCharacter(this.id).subscribe(() => {
+      this.router.navigate(['/characters']);
+    });
   }
 }
