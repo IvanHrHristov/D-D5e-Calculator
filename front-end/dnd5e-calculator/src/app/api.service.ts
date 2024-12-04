@@ -32,4 +32,12 @@ export class ApiService {
   deleteCharacter(characterId: string) {
     return this.http.delete<Character>(`/api/characters/delete/${characterId}`);
   }
+
+  likeCharacter(characterId: string) {
+    return this.http.get<Character>(`/api/characters/like/${characterId}`);
+  }
+
+  removeLikeFromCharacter(characterId: string) {
+    return this.http.get<Character>(`/api/characters/removeLike/${characterId}`);
+  }
 }

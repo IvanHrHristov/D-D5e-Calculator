@@ -4,11 +4,12 @@ import { UserService } from '../user.service';
 import { ProfileDetails } from '../../types/user';
 import { emailValidator } from '../../utils/email.validator';
 import { DOMAINS } from '../../constants';
+import { SlicePipe } from "../../shared/pipes/slice.pipe";
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, SlicePipe],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })

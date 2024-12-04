@@ -36,10 +36,10 @@ userController.post('/login', async (req, res) => {
 });
 
 userController.get('/profile', async (req, res) => {
-    const cookie = req.cookies['auth'];
-
     try {
-        const response = await userService.getProfile(cookie.email);
+        const userId = req.cookies['auth']._id;
+
+        const response = await userService.getProfile(userId);
     
         res.json(response);
         
@@ -51,13 +51,13 @@ userController.get('/profile', async (req, res) => {
 });
 
 userController.put('/profile', async (req, res) => {
-    const userId = req.cookies['auth']._id;
-    const userData = req.body;
-
     try {
+        const userId = req.cookies['auth']._id;
+        const userData = req.body;
+
         await userService.updateProfile(userId, userData);
 
-        const response = await userService.getProfile(userData.email);
+        const response = await userService.getProfile(userId);
 
         res.json(response);
 

@@ -5,4 +5,5 @@ export interface Character {
     weaponDice: string;
     attacks: number;
     owner: string;
+    likes: string[];
 }

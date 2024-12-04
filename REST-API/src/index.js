@@ -2,8 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import routes from './routes.js';
 import cors from 'cors';
-import 'dotenv/config';
 import cookieParser from 'cookie-parser';
+import 'dotenv/config';
 
 try {
     await mongoose.connect('mongodb://localhost:27017', {dbName:'dnd5e'});

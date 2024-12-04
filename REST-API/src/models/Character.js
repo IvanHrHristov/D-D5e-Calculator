@@ -20,7 +20,11 @@ const characterSchema = new Schema({
     owner: {
         type: Types.ObjectId,
         ref: 'User',
-    }
+    },
+    likes: [{
+        type: Types.ObjectId,
+        ref: 'User',
+    }],
 });
 
 const Character = model('Character', characterSchema);

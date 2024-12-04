@@ -15,6 +15,12 @@ const characterService = {
     },
     delete(characterId) {
         return Character.findByIdAndDelete(characterId);
+    },
+    like(characterId, userId) {
+        return Character.findByIdAndUpdate(characterId, {$push: {likes: userId}});
+    },
+    removeLike(characterId, userId) {
+        return Character.findByIdAndUpdate(characterId, {$pull: {likes: userId}});
     }
 }
 

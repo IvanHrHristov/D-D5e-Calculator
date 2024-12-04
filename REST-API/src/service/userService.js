@@ -34,8 +34,8 @@ const userService = {
 
         return this.generateResponse(user);
     }, 
-    async getProfile(email) {
-        const user = await User.findOne({ email });
+    async getProfile(userId) {
+        const user = await User.findById(userId);
         
         return this.generateResponse(user);
     },

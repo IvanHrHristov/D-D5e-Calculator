@@ -28,7 +28,7 @@
         </li>
       }@else {
         <li class="nav-item">
-          <a class="nav-link" routerLink="/profile">{{username}}</a>
+          <a class="nav-link" routerLink="/profile" style="color: antiquewhite;">{{username | slice: 15}}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" (click)="logout()" style="cursor: pointer;">Logout</a>

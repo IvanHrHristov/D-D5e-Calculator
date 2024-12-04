@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Character } from '../../types/character';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../api.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { UserService } from '../../user/user.service';
 import { User, UserForAuth } from '../../types/user';
+import { SlicePipe } from "../../shared/pipes/slice.pipe";
 
 @Component({
   selector: 'app-character-details',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, SlicePipe],
   templateUrl: './character-details.component.html',
   styleUrl: './character-details.component.css'
 })
@@ -19,20 +20,26 @@ export class CharacterDetailsComponent implements OnInit {
   weaponDice: string = '';
   attacks: number = 1;
   owner: string = '';
+  likes: string[] = [];
   id: string = '';
 
   isEditMode: boolean = false;
 
-  user: UserForAuth | null = null;
+  hasLiked = signal(false);
+  currentUserLiked = signal(0);
+
+  get isLogged(): boolean {
+    return this.userService.isLogged;
+  }
+
+  get userId(): string {
+    return this.userService.user?._id!;
+  }
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['characterId'];
-
-    this.userService.getProfile().subscribe(user => {
-      this.user = user;
-    });
 
     this.apiService.getSingleCharacter(this.id).subscribe(character => {
       this.characterName = character.characterName;
@@ -40,6 +47,9 @@ export class CharacterDetailsComponent implements OnInit {
       this.weaponDice = character.weaponDice;
       this.attacks = character.attacks;
       this.owner = character.owner;
+      this.likes = character.likes;
+
+      this.hasLiked.set(this.likes.includes(this.userId));
     });
   }
 
@@ -75,6 +85,22 @@ export class CharacterDetailsComponent implements OnInit {
   delete() {
     this.apiService.deleteCharacter(this.id).subscribe(() => {
       this.router.navigate(['/characters']);
+    });
+  }
+
+  like() {
+    this.apiService.likeCharacter(this.id).subscribe(() => {
+      this.hasLiked.set(true);
+      this.currentUserLiked.set(1);
+    });
+  }
+
+  removeLike() {
+    this.apiService.removeLikeFromCharacter(this.id).subscribe(() => {
+      this.hasLiked.set(false);
+      this.currentUserLiked.set(0);
+
+      this.likes = this.likes.filter(like => like !== this.userId);
     });
   }
 }

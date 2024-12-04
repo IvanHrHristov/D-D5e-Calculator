@@ -9,7 +9,7 @@
                     <h2 class="text-uppercase text-center mb-5">Character details</h2>
                     
                     <div data-mdb-input-init class="form-outline mb-4">
-                        <p><b>Character name:</b> {{characterName}}</p>
+                        <p><b>Character name:</b> {{characterName | slice: 40}}</p>
                     </div>
 
                     <div data-mdb-input-init class="form-outline mb-4">
@@ -24,15 +24,30 @@
                         <p><b>Number of attacks per round:</b> {{attacks}}</p>
                     </div>
 
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <p><b>Likes: </b> {{likes.length + currentUserLiked()}}</p>
+                    </div>
+                    
                     <!-- TODO: Math for DPR -->
 
-                    @if (user?._id === owner) {
+                    @if (userId === owner) {
                         <div class="d-flex justify-content-center">
                             <button data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" (click)="edit()">Edit</button>
                             <button data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block btn-lg gradient-custom-4 text-body" (click)="delete()">Delete</button>
                         </div>
                     }
-                    
+
+                    @if (isLogged) {
+                        <div class="d-flex justify-content-center">
+                            @if (!likes.includes(userId) && (owner !== userId) && !hasLiked()) {
+                                <a class="btn btn-primary" (click)="like()">Like</a>
+                            }
+                            
+                            @if((owner !== userId) && hasLiked()) {
+                                <a class="btn btn-secondary" (click)="removeLike()">Dislike</a>
+                            }
+                        </div>
+                    }
                 </div>
                 </div>
             </div>

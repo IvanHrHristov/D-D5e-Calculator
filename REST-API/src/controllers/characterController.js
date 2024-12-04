@@ -60,4 +60,36 @@ characterController.delete('/delete/:characterId', async (req, res) => {
     }
 });
 
+characterController.get('/like/:characterId', async (req, res) => {
+    const characterId = req.params.characterId;
+    const cookie = req.cookies['auth'];
+    const userId = cookie._id;
+
+    try {
+        await characterService.like(characterId, userId);
+
+        res.end();
+    } catch (error) {
+        console.error(error);
+        
+        res.status(503).end();
+    }
+});
+
+characterController.get('/removeLike/:characterId', async (req, res) => {
+    const characterId = req.params.characterId;
+    const cookie = req.cookies['auth'];
+    const userId = cookie._id;
+
+    try {
+        await characterService.removeLike(characterId, userId);
+
+        res.end();
+    } catch (error) {
+        console.error(error);
+        
+        res.status(503).end();
+    }
+});
+
 export default characterController;
