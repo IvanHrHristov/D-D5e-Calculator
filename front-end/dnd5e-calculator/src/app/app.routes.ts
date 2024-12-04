@@ -9,13 +9,14 @@ import { CreateCharacterComponent } from './character/create-character/create-ch
 import { CharacterListComponent } from './character/character-list/character-list.component';
 import { CharacterDetailsComponent } from './character/character-details/character-details.component';
 import { AuthGuard } from './guards/auth.guard';
+import { NoAuthGuard } from './guards/noAuth.guard';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
     {path: 'home', component: HomeComponent},
 
-    {path: 'login', component: LoginComponent},
-    {path: 'register', component: RegisterComponent},
+    {path: 'login', component: LoginComponent, canActivate: [NoAuthGuard]},
+    {path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard]},
     {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
 
     {path: 'characters', component: CharacterListComponent},

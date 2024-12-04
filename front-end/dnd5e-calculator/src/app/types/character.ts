@@ -1,5 +1,3 @@
-import { User } from "./user";
-
 export interface Character {
     _id: string;
     characterName: string;
