@@ -28,7 +28,45 @@
                         <p><b>Likes: </b> {{likes.length + currentUserLiked()}}</p>
                     </div>
                     
-                    <!-- TODO: Math for DPR -->
+                    <div class="switches-container">
+                        <div class="checkbox-container">
+                            <div>
+                                <p class="advantage"><b>Advantage?</b></p>
+                                <label class="switch">
+                                    <input type="checkbox" name="checkbox" [(ngModel)]="advantageIsChecked">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="checkbox-container">
+                            <div>
+                                <p class="advantage"><b>Class feature active?</b></p>
+                                <label class="switch">
+                                    <input type="checkbox" name="checkbox" [(ngModel)]="classFeatureIsChecked">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modifiers-container">
+                        <div class="ability">
+                            <p><b>Ability Modifier:</b> </p>
+                            <input type="number" name="abilityModifier" [(ngModel)]="abilityModifier" min="1" max="10">
+                        </div>
+                        <div class="proficiency">
+                            <p><b>Proficiency Bonus:</b> </p>
+                            <input type="number" name="proficiencyBonus" [(ngModel)]="proficiencyBonus" min="1" max="6">
+                        </div>
+                        <div class="targetAC">
+                            <p><b>Target's AC:</b> </p>
+                            <input type="number" name="targetsAC" [(ngModel)]="targetsAC" min="1" max="30">
+                        </div>
+                    </div>
+
+                    <div data-mdb-input-init class="d-flex justify-content-center align-items-center form-outline mb-4">
+                        <p class="fs-3"><b>DPR:</b> {{DPR}} <b>Chance to hit:</b> {{(chanceToHit * 100).toFixed(2)}}%</p>
+                    </div>
 
                     @if (userId === owner) {
                         <div class="d-flex justify-content-center">
@@ -44,7 +82,7 @@
                             }
                             
                             @if((owner !== userId) && hasLiked()) {
-                                <a class="btn btn-secondary" (click)="removeLike()">Dislike</a>
+                                <a class="btn btn-secondary" (click)="removeLike()">Remove Like</a>
                             }
                         </div>
                     }

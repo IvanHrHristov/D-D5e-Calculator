@@ -14,3 +14,4 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
 export class AppComponent {
   title = 'dnd5e-calculator';
 }
+//TODO: Change html and css of profile and page-not-found

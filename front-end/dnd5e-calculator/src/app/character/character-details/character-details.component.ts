@@ -23,6 +23,16 @@ export class CharacterDetailsComponent implements OnInit {
   likes: string[] = [];
   id: string = '';
 
+  advantageIsChecked: boolean = false;
+  classFeatureIsChecked: boolean = true;
+  averageDamageForWeaponDice: number = 0;
+  chanceToHit: number = 0.60;
+  abilityModifier: number = 1;
+  proficiencyBonus: number = 2;
+  targetsAC: number = 15;
+  classFeatureDamage: number = 0;
+  additionalAttacks: number = 0;
+
   isEditMode: boolean = false;
 
   hasLiked = signal(false);
@@ -34,6 +44,78 @@ export class CharacterDetailsComponent implements OnInit {
 
   get userId(): string {
     return this.userService.user?._id!;
+  }
+
+  get DPR(): number {
+    switch (this.weaponDice) {
+      case "d4":
+        this.averageDamageForWeaponDice = 2.5;
+        break;
+      case "d6":
+        this.averageDamageForWeaponDice = 3.5;
+        break;
+      case "d8":
+        this.averageDamageForWeaponDice = 4.5;
+        break;   
+      case "d10":
+        this.averageDamageForWeaponDice = 5.5;
+        break;
+      case "d12":
+        this.averageDamageForWeaponDice = 6.5;
+        break;
+      case "2d6":
+        this.averageDamageForWeaponDice = 7.0;
+        break; 
+      default:
+        this.averageDamageForWeaponDice = 0;
+        break;
+    }
+
+    if (this.advantageIsChecked) {
+      this.chanceToHit = parseFloat((1 - Math.pow((((this.targetsAC - this.abilityModifier - this.proficiencyBonus) - 1) / 20), 2)).toFixed(2));
+    }else {
+      this.chanceToHit = parseFloat(((21 - (this.targetsAC - this.abilityModifier - this.proficiencyBonus)) / 20).toFixed(2));
+    }
+
+    if (this.classFeatureIsChecked) {
+      switch (this.characterClass) {
+        case "barbarian":
+          this.classFeatureDamage = 2;
+          this.additionalAttacks = 0;
+          break;
+        case "fighter":
+          this.classFeatureDamage = 0;
+          this.additionalAttacks = 1;
+          break;
+        case "monk":
+          this.classFeatureDamage = 0;
+          this.additionalAttacks = 2;
+          break;   
+        case "paladin":
+          this.classFeatureDamage = 9 / this.attacks;
+          this.additionalAttacks = 0;
+          break;
+        case "ranger":
+          this.classFeatureDamage = 3.5;
+          this.additionalAttacks = 0;
+          break;
+        case "rogue":
+          this.classFeatureDamage = 10.5 / this.attacks;
+          this.additionalAttacks = 0;
+          break; 
+        default:
+          this.classFeatureDamage = 0;
+          this.additionalAttacks = 0;
+          break;
+      }
+    }else {
+      this.additionalAttacks = 0;
+      this.classFeatureDamage = 0;
+    }
+
+    const result = parseFloat(((this.classFeatureDamage + this.averageDamageForWeaponDice + this.abilityModifier) * (this.attacks + this.additionalAttacks) * this.chanceToHit).toFixed(2));
+
+    return result;
   }
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private router: Router, private userService: UserService) {}
