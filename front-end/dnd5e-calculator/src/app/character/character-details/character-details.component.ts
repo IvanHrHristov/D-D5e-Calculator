@@ -30,7 +30,8 @@ export class CharacterDetailsComponent implements OnInit {
   abilityModifier: number = 3;
   proficiencyBonus: number = 2;
   targetsAC: number = 14;
-  classFeatureDamage: number = 0;
+  classFeatureDamagePerAttack: number = 0;
+  classFeatureDamagePerRound: number = 0;
   additionalAttacks: number = 0;
 
   isEditMode: boolean = false;
@@ -80,40 +81,48 @@ export class CharacterDetailsComponent implements OnInit {
     if (this.classFeatureIsChecked) {
       switch (this.characterClass) {
         case "barbarian":
-          this.classFeatureDamage = 2;
+          this.classFeatureDamagePerAttack = 2;
+          this.classFeatureDamagePerRound = 0;
           this.additionalAttacks = 0;
           break;
         case "fighter":
-          this.classFeatureDamage = 0;
+          this.classFeatureDamagePerAttack = 0;
+          this.classFeatureDamagePerRound = 0;
           this.additionalAttacks = (this.attacks / 4);
           break;
         case "monk":
-          this.classFeatureDamage = 0;
+          this.classFeatureDamagePerAttack = 0;
+          this.classFeatureDamagePerRound = 0;
           this.additionalAttacks = 2;
           break;   
         case "paladin":
-          this.classFeatureDamage = 9 / this.attacks;
+          this.classFeatureDamagePerAttack = 0;
+          this.classFeatureDamagePerRound = 9;
           this.additionalAttacks = 0;
           break;
         case "ranger":
-          this.classFeatureDamage = 3.5;
+          this.classFeatureDamagePerAttack = 3.5;
+          this.classFeatureDamagePerRound = 0;
           this.additionalAttacks = 0;
           break;
         case "rogue":
-          this.classFeatureDamage = 10.5 / this.attacks;
+          this.classFeatureDamagePerAttack = 0;
+          this.classFeatureDamagePerRound = 10.5;
           this.additionalAttacks = 0;
           break; 
         default:
-          this.classFeatureDamage = 0;
+          this.classFeatureDamagePerAttack = 0;
+          this.classFeatureDamagePerRound = 0;
           this.additionalAttacks = 0;
           break;
       }
     }else {
+      this.classFeatureDamagePerAttack = 0;
+      this.classFeatureDamagePerRound = 0;
       this.additionalAttacks = 0;
-      this.classFeatureDamage = 0;
     }
 
-    const result = parseFloat(((this.classFeatureDamage + this.averageDamageForWeaponDice + this.abilityModifier) * (this.attacks + this.additionalAttacks) * this.chanceToHit).toFixed(2));
+    const result = parseFloat((((this.classFeatureDamagePerAttack + this.averageDamageForWeaponDice + this.abilityModifier) * (this.attacks + this.additionalAttacks) + this.classFeatureDamagePerRound) * this.chanceToHit).toFixed(2));
 
     return result;
   }

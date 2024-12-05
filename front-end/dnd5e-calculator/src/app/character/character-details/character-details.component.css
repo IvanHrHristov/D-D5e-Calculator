@@ -74,7 +74,7 @@ border-radius: 50%;
 }
 
 input:checked + .slider {
-background-color: #2196F3;
+background-color: #202529;
 }
 
 input:checked + .slider:before {
