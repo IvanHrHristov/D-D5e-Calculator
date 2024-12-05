@@ -81,7 +81,8 @@ input:checked + .slider:before {
 transform: translateX(26px);
 }
 
-.advantage {
+.advantage,
+.class-feature {
     font-size: large;
     font-style: italic;
 }
@@ -101,3 +102,31 @@ transform: translateX(26px);
     display: flex;
     align-items: center;
 }
+
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+  
+.tooltip-bubble {
+    visibility: hidden;
+    width: 200px;
+    background-color: #202529;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 40%;
+    margin-left: -80px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+  
+.tooltip-container:hover .tooltip-bubble {
+    visibility: visible;
+    opacity: 1;
+}
+  

@@ -39,8 +39,29 @@
                             </div>
                         </div>
                         <div class="checkbox-container">
-                            <div>
-                                <p class="advantage"><b>Class feature active?</b></p>
+                            <div class="tooltip-container">
+                                <p class="class-feature"><b>Class feature active?</b></p><span class="tooltip-bubble">
+                                    @switch (characterClass) {
+                                        @case ('barbarian') {
+                                            <b>Rage:</b> Adds 2 extra damage on every attack.
+                                        }
+                                        @case ('fighter') {
+                                            <b>Action Surge:</b> Doubles the number of attacks you are able to do on 1 round of combat. DPR is calculated as the average over the course of 4 rounds.
+                                        }
+                                        @case ('monk') {
+                                            <b>Flurry  of blows:</b> Adds 2 extra attacks on every round of combat.
+                                        }
+                                        @case ('paladin') {
+                                            <b>Divine smite:</b> Adds 2d8 extra damage on half of the attacks each round.
+                                        }
+                                        @case ('ranger') {
+                                            <b>Hunter's Mark:</b> Adds 1d6 extra damage on every attack.
+                                        }
+                                        @case ('rogue') {
+                                            <b>Sneak attack:</b> Adds 3d6 extra damage on 1 attack every turn.
+                                        }
+                                    }
+                                </span>
                                 <label class="switch">
                                     <input type="checkbox" name="checkbox" [(ngModel)]="classFeatureIsChecked">
                                     <span class="slider"></span>

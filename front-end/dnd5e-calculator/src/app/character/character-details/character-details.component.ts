@@ -27,9 +27,9 @@ export class CharacterDetailsComponent implements OnInit {
   classFeatureIsChecked: boolean = true;
   averageDamageForWeaponDice: number = 0;
   chanceToHit: number = 0.60;
-  abilityModifier: number = 1;
+  abilityModifier: number = 3;
   proficiencyBonus: number = 2;
-  targetsAC: number = 15;
+  targetsAC: number = 14;
   classFeatureDamage: number = 0;
   additionalAttacks: number = 0;
 
@@ -85,7 +85,7 @@ export class CharacterDetailsComponent implements OnInit {
           break;
         case "fighter":
           this.classFeatureDamage = 0;
-          this.additionalAttacks = 1;
+          this.additionalAttacks = (this.attacks / 4);
           break;
         case "monk":
           this.classFeatureDamage = 0;
