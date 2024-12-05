@@ -26,3 +26,16 @@ body {
     margin-left: 15px;
     margin-right: 15px;
 }
+
+.card-title {
+    font-size: 3rem;
+}
+
+.container-no-characters {
+    min-height: 88vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}

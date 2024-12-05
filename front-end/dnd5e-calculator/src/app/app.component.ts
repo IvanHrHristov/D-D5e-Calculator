@@ -14,4 +14,3 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
 export class AppComponent {
   title = 'dnd5e-calculator';
 }
-// TODO: Add .md file to briefly descrbie the project (used frameworks and libraries, how to run it, functionality, architecture)

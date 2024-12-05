@@ -11,10 +11,10 @@
                             <img src='{{character.characterClass + "-icon.png"}}' class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{character.characterName | slice}}</h5>
-                                <p class="card-text">Class: {{character.characterClass}}</p>
-                                <p class="card-text">Number of attacks: {{character.attacks}}</p>
-                                <p class="card-text">Weapon dice: {{character.weaponDice}}</p>
-                                <p class="card-text">Likes: {{character.likes.length}}</p>
+                                <p class="card-text"><b>Class:</b> {{character.characterClass}}</p>
+                                <p class="card-text"><b>Number of attacks:</b> {{character.attacks}}</p>
+                                <p class="card-text"><b>Weapon dice:</b> {{character.weaponDice}}</p>
+                                <p class="card-text"><b>Likes:</b> {{character.likes.length}}</p>
 
                                 <div class="d-flex justify-content-center">
                                     <a routerLink='{{"/characters/details/" + character._id}}' class="btn btn-primary">Details</a>
@@ -27,7 +27,11 @@
             </div>
         </div>
     }@else {
-        <!-- TODO: FIX THIS  -->
-        <h1>No characters for now</h1> 
+        <div class="container-no-characters">
+            <div class="row">
+                <h1>No characters found... be the first to <a routerLink="/characters/create">make one!</a></h1> 
+                
+            </div>
+        </div>
     }
 </body>
