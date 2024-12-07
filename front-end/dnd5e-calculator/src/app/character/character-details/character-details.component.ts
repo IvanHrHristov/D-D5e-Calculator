@@ -29,7 +29,7 @@ export class CharacterDetailsComponent implements OnInit {
   chanceToHit: number = 0.60;
   abilityModifier: number = 3;
   proficiencyBonus: number = 2;
-  targetsAC: number = 14;
+  targetsAC: number = 13;
   classFeatureDamagePerAttack: number = 0;
   classFeatureDamagePerRound: number = 0;
   additionalAttacks: number = 0;
@@ -72,11 +72,13 @@ export class CharacterDetailsComponent implements OnInit {
         break;
     }
 
+    this.chanceToHit = Math.min(((20 - (this.targetsAC - this.abilityModifier - this.proficiencyBonus)) / 20), 0.95);
+
     if (this.advantageIsChecked) {
-      this.chanceToHit = parseFloat((1 - Math.pow((((this.targetsAC - this.abilityModifier - this.proficiencyBonus) - 1) / 20), 2)).toFixed(2));
+      this.chanceToHit = Math.min(parseFloat((1 - Math.pow(1 - this.chanceToHit, 2)).toFixed(2)), 0.9975);
     }else {
-      this.chanceToHit = parseFloat(((21 - (this.targetsAC - this.abilityModifier - this.proficiencyBonus)) / 20).toFixed(2));
-    }
+      this.chanceToHit = parseFloat(this.chanceToHit.toFixed(2));
+    } 
 
     if (this.classFeatureIsChecked) {
       switch (this.characterClass) {

@@ -1,9 +1,7 @@
 @if (!isEditMode) {
-    <!-- READONLY MODE -->
     <ng-container>
         <div class="container">
             <div class="profile">
-            <!-- <img src="./profile.png" alt="default user"> -->
                 <h3>User Info:</h3>
                 <div class="flex">
                     <p>Username: </p>
@@ -18,12 +16,9 @@
         </div>
     </ng-container>
 }@else {
-    <!-- EDIT MODE -->
-    
     <ng-container>
         <div class="container">
             <div class="profile">
-                <!-- <img src="./profile.png" alt="default user"> -->
                 <h3>User Info:</h3>
                 <form [formGroup]="form" (ngSubmit)="handleSaveProfile()">
                     <div class="flex">

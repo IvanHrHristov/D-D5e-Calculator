@@ -31,16 +31,22 @@
                     <div class="switches-container">
                         <div class="checkbox-container">
                             <div>
-                                <p class="advantage"><b>Advantage?</b></p>
-                                <label class="switch">
-                                    <input type="checkbox" name="checkbox" [(ngModel)]="advantageIsChecked">
-                                    <span class="slider"></span>
-                                </label>
+                                <div class="tooltip-container">
+                                    <p class="advantage"><b>Advantage?</b></p>
+                                    <span class="tooltip-bubble">
+                                        <b>Advantage: </b> Roll 2d20 instead of 1d20 and pick the higher of the two rolls.
+                                    </span>
+                                    <label class="switch">
+                                        <input type="checkbox" name="checkbox" [(ngModel)]="advantageIsChecked">
+                                        <span class="slider"></span>
+                                    </label>
+                                 </div>
                             </div>
                         </div>
                         <div class="checkbox-container">
                             <div class="tooltip-container">
-                                <p class="class-feature"><b>Class feature active?</b></p><span class="tooltip-bubble">
+                                <p class="class-feature"><b>Class feature active?</b></p>
+                                <span class="tooltip-bubble">
                                     @switch (characterClass) {
                                         @case ('barbarian') {
                                             <b>Rage:</b> Adds 2 extra damage on every attack.
