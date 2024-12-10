@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   }
 
   form = new FormGroup({
-    username: new FormControl('', [Validators.required, Validators.minLength(5)]),  
+    username: new FormControl('', [Validators.required, Validators.minLength(2)]),  
     email: new FormControl('', [Validators.required, emailValidator(DOMAINS)]),
   })
   

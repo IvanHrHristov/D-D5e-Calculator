@@ -1,50 +1,96 @@
 @if (!isEditMode) {
-    <ng-container>
-        <div class="container">
-            <div class="profile">
-                <h3>User Info:</h3>
-                <div class="flex">
-                    <p>Username: </p>
-                    <p>{{profileDetails.username | slice: 20}}</p>
+    <div class="mask d-flex align-items-center justify-content-center gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div class="card" style="border-radius: 15px;">
+                <div class="card-body p-5">
+
+                    <h2 class="text-uppercase text-center mb-5">User info</h2>
+                    
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <p><b>Username:</b> {{profileDetails.username | slice: 20}}</p>
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <p><b>Email:</b> {{profileDetails.email | slice: 25}}</p>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" (click)="edit()">Edit</button>
+                    </div>
                 </div>
-                <div class="flex">
-                    <p>Email: </p>
-                    <p>{{profileDetails.email | slice: 25}}</p>
                 </div>
-                <button class="edit-button" (click)="edit()">Edit</button>        
+            </div>
             </div>
         </div>
-    </ng-container>
+    </div>
 }@else {
-    <ng-container>
-        <div class="container">
-            <div class="profile">
-                <h3>User Info:</h3>
-                <form [formGroup]="form" (ngSubmit)="handleSaveProfile()">
-                    <div class="flex">
-                        <p>Username: </p>
-                        <input 
-                        type="text" 
-                        name="username" 
-                        id="username" 
-                        formControlName="username"
-                        >
-                    </div>
-                    <div class="flex">
-                        <p>Email: </p>
-                        <input 
-                        type="email" 
-                        name="email" 
-                        id="email" 
-                        formControlName="email"
-                        >
-                    </div>
-                    <div class="btn-wrapper">
-                        <button class="red-button" (click)="cancel($event)">Cancel</button>
-                        <button class="green-button" [disabled]="form.invalid" [style]="{backgroundColor: form.invalid ? 'grey': '#5cb85c'}">Save</button>
-                    </div>
-                </form>
+    <div class="mask d-flex align-items-center justify-content-center gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div class="card" style="border-radius: 15px;">
+                <div class="card-body p-5">
+                    
+                    <form [formGroup]="form" (ngSubmit)="handleSaveProfile()">
+                        <fieldset>
+                            <h2 class="text-uppercase text-center mb-5">Edit user details</h2>
+                            
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="form3Example1cg">Username:</label>
+                                <input 
+                                type="text" 
+                                name="username" 
+                                id="username" 
+                                formControlName="username"
+                                />
+                            </div>
+        
+                            @if (form.get('username')?.touched) {
+                                <div>
+                                    @if (form.get('username')?.errors?.['required']) {
+                                        <p class="error">Username is required!</p>
+                                    }
+                                    @if (form.get('username')?.errors?.['minlength']) {
+                                        <p class="error">Username should be at least 2 characters!</p>
+                                    }
+                                </div>
+                            }
+        
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="form3Example1cg">Email:</label>
+                                <input 
+                                type="email" 
+                                name="email" 
+                                id="email" 
+                                formControlName="email"
+                                />
+                            </div>
+
+                            @if (form.get('email')?.touched) {
+                                <div>
+                                    @if (form.get('email')?.errors?.['required']) {
+                                        <p class="error">Email is required!</p>
+                                    }
+                
+                                    @if (form.get('email')?.errors?.['emailIsValid']) {
+                                        <p class="error">Email is not valid!</p>
+                                    }
+                                </div>
+                            }
+        
+                            <div class="d-flex justify-content-center">
+                                <button [disabled]="form.invalid" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Confirm</button>
+                                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-danger btn-block btn-lg gradient-custom-4 text-body" (click)="cancel($event)">Cancel</button>
+                            </div>
+                        </fieldset>
+                    </form>
+        
+                </div>
+                </div>
+            </div>
             </div>
         </div>
-    </ng-container>
+    </div>
 }
